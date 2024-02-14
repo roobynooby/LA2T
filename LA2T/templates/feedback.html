@@ -1,0 +1,144 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="../static/feedback.css">
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <a class="navbar-brand" href="/"><img src="{{ url_for('static', filename='Logo.png') }}" width="60" height="60"></a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/audit_files">Audit Results</a>
+                </li>
+    
+                <li class="nav-item">
+                    <a class="nav-link" href="/second_page">Offline Audit</a>
+                </li>
+    
+    
+                <li class="nav-item">
+                    <a class="nav-link" href="/schedule_audit_route">Schedule Audit</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/create_custom_script">Custom Profiles</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" href="{{ url_for('feedback') }}">Feedback Form</a>
+                </li>
+    
+                <li class="nav-item">
+                    <a class="nav-link" href="/about_us">About</a>
+                </li>
+            
+                <!-- Add more links as needed -->
+            </ul>
+        </div>
+    </nav><br><br><br><br>
+
+    <div class="contact-container">
+        <form method="POST" class="contact-left">
+            <div class="contact-left-title">
+                <h2>We highly value your feedback! <br>Kindly take a moment to
+                    provide us with your valuable feedback.</h2>
+                <hr>
+            </div>
+
+            <input type="text" id="name" name="name" placeholder="your name" class="contact-inputs" required>
+            <input type="email" id="email" placeholder="your email" class="contact-inputs" required>
+            <textarea name="message" placeholder="your message" id="mess" class="contact-inputs" required></textarea>
+            <button type="button" id="submitButton">Submit <img src="{{ url_for('static', filename='arrow_icon.png') }}" alt=""></button>
+
+            <button type="button" id="exitButton">Home <img src="{{ url_for('static', filename='back_icon.png') }}" alt=""></button>
+
+        </form>
+        <div class="contact-right">
+            <img src="{{ url_for('static', filename='right_img.png') }}" alt="">
+        </div>
+    </div>
+
+    <form method="POST" class="contact-left" onsubmit="return validateForm()">
+        <!-- input fields here -->
+    </form>
+
+    <script>
+        // Get the submit button element by its id
+var submitButton = document.getElementById("submitButton");
+
+// Add a click event listener to the submit button
+submitButton.addEventListener("click", function() {
+  // Check if all required fields have been filled out
+  if (validateForm()) {
+    // Call the sendemail function
+    sendemail();
+  }
+});
+    </script>
+
+    <script>
+        function validateForm() {
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var mess = document.getElementById("mess").value;
+
+            if (name === "" || email === "" || mess === "") {
+                alert("Please fill out all fields before submitting the form.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+
+    <script>
+        // Get the button element by its id
+        var exitButton = document.getElementById("exitButton");
+
+        // Add a click event listener to the button
+        exitButton.addEventListener("click", function() {
+            // Redirect to index.html when the button is clicked
+            window.location.href = "{{ url_for('index') }}";
+        });
+    </script>
+
+    <script>
+        function sendemail() {
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var mess = document.getElementById("mess").value;
+
+            var body = "name:" + name + "<br/> email:" + email + "<br/> message:" + mess;
+             console.log(body);
+
+            Email.send({
+                SecureToken :"8c7dadd7-70c2-47a6-b864-501e2593c2a5",
+                To: 'formfeedback228@gmail.com',
+                From: "formfeedback228@gmail.com",
+                Subject: "Feedback",
+                Body: body
+            }).then(
+                message => {
+                    if(message=='OK'){
+
+                        swal("Successfull!", "Feedback Recieved!", "success");
+                    }
+                    else{
+                        swal("Something Went Wrong!", "Try again!", "error");
+                    }
+                }
+            );
+        }
+    </script>
+</body>
+</html>

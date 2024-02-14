@@ -16,7 +16,9 @@ Once you have the folder on your machine, follow these steps below:
 
 
 We thank you for your support and we hope you find LA2T to be useful and helpful for your works. :)
+
 Do also check out our main website to learn more about LA2T
+
 https://reubens.gitbook.io/la2t/
 
 

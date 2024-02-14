@@ -17,3 +17,4 @@ pip install schedule
 pip3 install firebase
 pip3 install nodejs npm
 pip3 install firebase-admin
+pip install flask_cors

@@ -16,6 +16,8 @@ Once you have the folder on your machine, follow these steps below:
 
 
 We thank you for your support and we hope you find LA2T to be useful and helpful for your works. :)
+Do also check out our main website to learn more about LA2T
+https://reubens.gitbook.io/la2t/
 
 
 ![Logo](https://github.com/roobynooby/LA2T/assets/104315028/2db21cc9-cb13-4f31-94c5-df2088ddb754)

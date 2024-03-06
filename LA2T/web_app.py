@@ -435,13 +435,13 @@ def about_us():
     return render_template('about_us.html')
 
 # Flask-Mail configuration
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'  # set to whichever email type you wish to use
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USE_SSL'] = False
-app.config['MAIL_USERNAME'] = 'rubynewby0908@gmail.com'
-app.config['MAIL_PASSWORD'] = 'vybf jgym rheu akhk'
-app.config['MAIL_DEFAULT_SENDER'] = 'rubynewby0908@gmail.com'
+app.config['MAIL_USERNAME'] = 'youremail@email.com'
+app.config['MAIL_PASSWORD'] = 'yourmailapppassword'
+app.config['MAIL_DEFAULT_SENDER'] = 'youremail@email.com'
 
 mail = Mail(app)
 
@@ -457,7 +457,7 @@ def send_email():
 
     try:
         # Create the message
-        msg = Message('CSV File from Your Application', sender='rubynewby0908@gmail.com', recipients=[user_email])
+        msg = Message('CSV File from Your Application', sender='youremail@email.com', recipients=[user_email])
         msg.body = "Please find the attached CSV file."
 
         # Attach the CSV file(s)
